@@ -1,0 +1,27 @@
+{
+  "name": "army_date_calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "flatpickr": "^4.6.9",
+    "mongodb": "^4.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hOch1/Army_Date_Calculator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hOch1/Army_Date_Calculator/issues"
+  },
+  "homepage": "https://github.com/hOch1/Army_Date_Calculator#readme"
+}

@@ -27,7 +27,11 @@ app.get('/soldier', (req, res) => {
     res.render('index.ejs');
 })
 
-app.get('/cal/:type', (req, res) => {
+app.get('/signup', (req, res) => {
+    res.render('signup.ejs');
+})
+
+app.get('/cal', (req, res) => {
     
 })
 

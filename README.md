@@ -28,6 +28,11 @@ npm install flatpickr --save
 npm install mongodb --save
 ```
 
+## 업데이트 내역
+
+* 0.0.1
+    * 작업 진행 중
+
 ## 정보
 
 최준영 – h0ch1@naver.com

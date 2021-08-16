@@ -28,9 +28,13 @@ npm install flatpickr --save
 npm install mongodb --save
 ```
 
-## Built With 
+## 정보
 
-* [최준영](https://www.instagram.com/01_jy_official/) - 프로젝트 제작
+최준영 – h0ch1@naver.com
+
+MIT 라이센스를 준수하며 ``LICENSE``에서 자세한 정보를 확인할 수 있습니다.
+
+instargram - [https://www.instagram.com/01_jy_official/](https://www.instagram.com/01_jy_official/)
 
 ## License / 라이센스
 

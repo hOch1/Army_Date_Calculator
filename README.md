@@ -30,7 +30,7 @@ npm install mongodb --save
 
 ## Built With 
 
-* [최준영](링크) - 프로젝트 제작
+* [최준영](https://www.instagram.com/01_jy_official/) - 프로젝트 제작
 
 ## License / 라이센스
 

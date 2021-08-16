@@ -20,6 +20,14 @@ MongoClient.connect(dburl, (err, client) => {
 });
 
 app.get('/', (req, res) => {
+    res.render('login.ejs');
+})
+
+app.get('/soldier', (req, res) => {
     res.render('index.ejs');
+})
+
+app.get('/cal/:type', (req, res) => {
+    
 })
 

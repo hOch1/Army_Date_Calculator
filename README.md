@@ -15,7 +15,6 @@ node server.js
 ```
 express
 ejs
-flatpickr
 mongodb
 ```
 
@@ -26,7 +25,6 @@ mongodb
 ```
 npm install express --save
 npm install ejs --save
-npm install flatpickr --save
 npm install mongodb --save
 ```
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
+const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 
 const dburl = "mongodb+srv://h0ch1:a02070203@nodetest.kijps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
@@ -10,7 +10,7 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.set('view engine' , 'ejs');
 app.use('/public', express.static('public'));
-app.use(session({secret : '비밀코드', resave : true, saveUninitialized: false}));
+app.use(session({secret : '12312dajfj23rj2po4$#%@#', resave : true, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 

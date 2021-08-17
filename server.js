@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;

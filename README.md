@@ -16,6 +16,10 @@ node server.js
 express
 ejs
 mongodb
+bodyparser
+passport
+passport-local
+express-session
 ```
 
 ### Installing
@@ -26,6 +30,9 @@ mongodb
 npm install express --save
 npm install ejs --save
 npm install mongodb --save
+npm install bodyparser --save
+npm install passport passport-local express-session --save
+
 ```
 
 ## 업데이트 내역

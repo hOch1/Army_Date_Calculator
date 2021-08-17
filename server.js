@@ -68,11 +68,11 @@ passport.use(new LocalStrategy({
     db.collection('users').findOne({ id: id }, function (err, result) {
       if (err) return done(err)
   
-      if (!result) return done(null, false, { message: '존재하지않는 아이디요' })
+      if (!result) return done(null, false, { message: '존재하지않는 아이디 입니다.' })
       if (pw == result.pw) {
         return done(null, result)
       } else {
-        return done(null, false, { message: '비번틀렸어요' })
+        return done(null, false, { message: '비밀번호를 확인해 주세요.' })
       }
     })
   }));

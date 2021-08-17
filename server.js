@@ -76,7 +76,7 @@ passport.use(new LocalStrategy({
       }
     })
   }));
-//  session 생성
+//  passport - session 생성
   passport.serializeUser(function (user, done) {
     done(null, user.id)
   });

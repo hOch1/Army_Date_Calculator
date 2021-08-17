@@ -14,6 +14,8 @@ app.use(session({secret : '12312dajfj23rj2po4$#%@#', resave : true, saveUninitia
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// db연결 & 서버 실행
 var db
 MongoClient.connect(dburl, (err, client) => {
     if(err) return console.log(err);
@@ -22,41 +24,36 @@ MongoClient.connect(dburl, (err, client) => {
 
     app.listen(8080, () => {
         console.log('server start');
-    });
+    })지
 });
 
+// index 페이지
 app.get('/', (req, res) => {
     res.render('index.ejs');
 })
 
+// 로그인 페이지
 app.get('/signin', (req, res) => {
     res.render('login.ejs');
 })
 
-app.post('/login', passport.authenticate('local', {failureRedirect : '/fail'}), (req, res) =>{
-    res.redirect('/');
-})
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect : '/fail'
+  })
+);
 
-app.get('/mypage', login, (req, res) => {
-    res.render('mypage.ejs', {});
-})
-
-function login(req, res, next) {
-    if (req.user) {
-      next();
-    } else {
-        res.redirect('/fail');
-    }
-}
-
+// 로그인 페이지 - 로그인 실패시
 app.get('/fail', (req, res) => {
     res.render('fail.ejs');
 })
 
+// 회원가입
 app.get('/signup', (req, res) => {
     res.render('signup.ejs');
 })
 
+// 전역일 계산
 app.get('/cal', (req, res) => {
     res.render('cal.ejs');
 })

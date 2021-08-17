@@ -63,8 +63,8 @@ app.get('/cal', (req, res) => {
 
 //  passport
 passport.use(new LocalStrategy({
-    usernameField: 'id',
-    passwordField: 'pw',
+    usernameField: 'name',
+    passwordField: 'passwd',
     session: true,
     passReqToCallback: false,
   }, function (id, pw, done) {

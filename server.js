@@ -24,7 +24,7 @@ MongoClient.connect(dburl, (err, client) => {
 
     app.listen(8080, () => {
         console.log('server start');
-    })지
+    })
 });
 
 // index 페이지

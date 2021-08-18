@@ -17,21 +17,6 @@ app.use('/public', express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.use(
-  session({
-    secret : '12312dajfj23rj2po4$#%@#', 
-    resave : true, 
-    saveUninitialized : false,
-    store : MongoStore.create({
-      mongoUrl : dburl
-    })
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
-
-
 // db연결 & 서버 실행
 var db
 MongoClient.connect(dburl, (err, client) => {
@@ -109,37 +94,4 @@ app.post('/result', (req, res) => {
     left : (totalDay-nowDay),
     per : result.toFixed(2)+'%'
   });
-
-  console.log("총복무일수 : "+totalDay+"\n현재복무 일수 :"+nowDay+"\n남은 일수:"+(totalDay-nowDay));
-  console.log(result.toFixed(2)+"%");
-
 })
-
-
-//  passport
-passport.use(new LocalStrategy({
-  usernameField: 'name',
-  passwordField: 'passwd',
-  session : true
-}, (username, password, done) => {
-  db.collection('users').findOne({ id: username }, (err, user) => {
-    if (err) return done(err)
-    if (!user) return done(null, false, { message: '존재하지않는 아이디 입니다.' });
-    if (password == user.password) {
-      return done(null, user)
-    } else {
-      return done(null, false, { message: '비밀번호를 확인해 주세요.' })
-    }
-  })
-}));
-
-//  passport - session 생성
-passport.serializeUser(function (user, done) {
-  done(null, user.id)
-});
-
-passport.deserializeUser(function (id, done) {
-    db.collection('users').findById(id, (err, result) => {
-            done(err, result);
-    })
-}); 

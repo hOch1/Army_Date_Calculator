@@ -38,7 +38,8 @@ npm install passport passport-local express-session --save
 ## 업데이트 내역
 
 * 0.0.1
-    * 작업 진행 중
+    * 전역일 계산기능 추가
+    * 작업 진행 중...
 
 ## 정보
 

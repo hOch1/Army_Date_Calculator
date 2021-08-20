@@ -49,8 +49,8 @@
         socket.emit('msg', $('#in').val());
       })
 
-      socket.on('send', (data) => {
-        $('.list-group').append('<li class="list-group-item">'+data.name+": "+data+'</li>');
+      socket.on('send', (msg) => {
+        $('.list-group').append('<li class="list-group-item">'+msg+'</li>');
         $('.list-group').scrollTop( $('.list-group').prop('scrollHeight'));
       })
 

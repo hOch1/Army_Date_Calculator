@@ -104,7 +104,7 @@ app.post('/result', (req, res) => {
 // socket.io
 io.on('connection', (socket) => {
 
-  socket.on('msg', (data) => {
-    io.emit('send', data);
+  socket.on('msg', (msg) => {
+    io.emit('send', msg);
   });
 })

@@ -15,20 +15,60 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- socket.io -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script> 
     
     
     <title>전역일 계산기</title>
   </head>
   <body>
-    <div class="jumbotron text-center mb-0"> 
-      <h1>Army Date Calculator</h1> 
-    </div>
-
 
     <%- include('nav.html') %> 
 
+    <div class="container mt-5">
+      <ul class="list-group" style="height: 300px; overflow-y: scroll">
+
+      </ul>
+
+      <div class="input-group mb-3">
+        <input id="in" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">전송</button>
+      </div>
+    </div>
+   
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <script>
+      
+      var socket = io();
+
+
+      socket.on('connect', () => {
+        var name = prompt('이름을 입력해주세요.', '');
+
+        if(!name){
+          name = '익명'
+        }
+        
+        socket.emit('new', name);
+      })
+
+      socket.on('send', (data) => {
+        socket.emit('')
+      })
+
+
+      $('#button-addon2').click(()=>{
+        socket.emit('me', $('#in').val());
+      })
+
+      socket.on('other', (data) => {
+        $('.list-group').append('<li class="list-group-item">'+data+'</li>');
+        $('.list-group').scrollTop( $('.list-group').prop('scrollHeight'));
+      })
+    </script>
   </body>
 </html>

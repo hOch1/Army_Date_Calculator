@@ -6,7 +6,11 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo');
+const socket = require('socket.io');
 const app = express();
+const http = require('http').createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(http);
 
 const dburl = "mongodb+srv://h0ch1:a02070203@nodetest.kijps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
@@ -24,7 +28,7 @@ MongoClient.connect(dburl, (err, client) => {
 
     db = client.db('armydate');
 
-    app.listen(8080, () => {
+    http.listen(8080, () => {
         console.log('server start');
     })
 });
@@ -94,4 +98,25 @@ app.post('/result', (req, res) => {
     left : (totalDay-nowDay),
     per : result.toFixed(2)+'%'
   });
+})
+
+
+// socket.io
+io.on('connection', (socket) => {
+
+  socket.on('connection', (socket) => {
+    socket.on('new', (name) => {
+      socket.name = name
+      io.broadcast.emit('update', {type: 'connect', name: 'SERVER', message: name + ' 님이 접속했습니다.'});
+    })
+  })
+  
+  socket.on('chat', (data) => {
+    data.name = socket.name;
+    socket.broadcast.emit('send', data);
+  });
+
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('update', {type: 'disconnect', name: 'SERVER', message: socket.name + '님이 나가셨습니다.'});
+  })
 })

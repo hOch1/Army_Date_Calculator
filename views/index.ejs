@@ -45,30 +45,15 @@
       
       var socket = io();
 
-
-      socket.on('connect', () => {
-        var name = prompt('이름을 입력해주세요.', '');
-
-        if(!name){
-          name = '익명'
-        }
-        
-        socket.emit('new', name);
+      $('#button-addon2').click(()=>{
+        socket.emit('msg', $('#in').val());
       })
 
       socket.on('send', (data) => {
-        socket.emit('')
-      })
-
-
-      $('#button-addon2').click(()=>{
-        socket.emit('me', $('#in').val());
-      })
-
-      socket.on('other', (data) => {
-        $('.list-group').append('<li class="list-group-item">'+data+'</li>');
+        $('.list-group').append('<li class="list-group-item">'+data.name+": "+data+'</li>');
         $('.list-group').scrollTop( $('.list-group').prop('scrollHeight'));
       })
+
     </script>
   </body>
 </html>

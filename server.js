@@ -104,19 +104,7 @@ app.post('/result', (req, res) => {
 // socket.io
 io.on('connection', (socket) => {
 
-  socket.on('connection', (socket) => {
-    socket.on('new', (name) => {
-      socket.name = name
-      io.broadcast.emit('update', {type: 'connect', name: 'SERVER', message: name + ' 님이 접속했습니다.'});
-    })
-  })
-  
-  socket.on('chat', (data) => {
-    data.name = socket.name;
-    socket.broadcast.emit('send', data);
+  socket.on('msg', (data) => {
+    io.emit('send', data);
   });
-
-  socket.on('disconnect', () => {
-    socket.broadcast.emit('update', {type: 'disconnect', name: 'SERVER', message: socket.name + '님이 나가셨습니다.'});
-  })
 })

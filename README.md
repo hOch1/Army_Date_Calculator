@@ -20,6 +20,7 @@ bodyparser
 passport
 passport-local
 express-session
+socket.io
 ```
 
 ### Installing
@@ -32,6 +33,7 @@ npm install ejs --save
 npm install mongodb --save
 npm install bodyparser --save
 npm install passport passport-local express-session --save
+npm install socket.io --save
 
 ```
 
@@ -39,6 +41,8 @@ npm install passport passport-local express-session --save
 
 * 0.0.1
     * 전역일 계산기능 추가
+* 0.0.2
+    * 메인 페이지 실시간 채팅 구현
     * 작업 진행 중...
 
 ## 정보

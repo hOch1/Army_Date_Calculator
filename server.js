@@ -132,6 +132,13 @@ app.post('/add', (req, res) => {
   })
 })
 
+// 게시판 - 상세페이지
+app.get('/detail/:id', (req, res) => {
+  db.collection('board').find().toArray((err, result) => {
+    res.render('detail.ejs', {posts : result, id : req.params.id});
+  })
+})
+
 
 // socket.io
 io.on('connection', (socket) => {

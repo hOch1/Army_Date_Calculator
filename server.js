@@ -103,8 +103,34 @@ app.post('/result', (req, res) => {
 
 // socket.io
 io.on('connection', (socket) => {
+  
+  socket.on('newUser', (name)=> {
+    socket.name = name;
+    io.sockets.emit('update',{
+      type: 'connect',
+      name: 'SERVER',
+      message: name+'님이 접속하였습니다'
+    });
+  });
+
+  socket.on('message', (data) => {
+    data.name = socket.name;
+    socket.broadcast.emit('update', data);
+  })
+
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('update', {
+      type: 'disconnect',
+      name: 'SERVER',
+      message: socket.name+'님이 나가셨습니다'
+    });
+  })
 
   socket.on('msg', (msg) => {
-    io.emit('send', msg);
+    io.emit('update', {
+      type: 'msg',
+      name: socket.name,
+      message: msg
+    });
   });
 })

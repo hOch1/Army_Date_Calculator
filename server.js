@@ -139,6 +139,21 @@ app.get('/detail/:id', (req, res) => {
   })
 })
 
+// 게시판 - 수정
+app.get('/edit/:id', (req, res) => {
+  db.collection('board').findOne({_id : parseInt(req.params.id)}, (err, result) => {
+    res.render('edit.ejs', {posts : result});
+  })
+})
+
+// 게시판 - 삭제
+app.get('/delete/:id', (req, res) => {
+  db.collection('board').findOne({_id : parseInt(req.params.id)}, (err, result) => {
+    res.render('edit.ejs', {posts : result});
+  })
+})
+
+
 
 // socket.io
 io.on('connection', (socket) => {

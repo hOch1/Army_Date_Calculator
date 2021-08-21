@@ -21,6 +21,7 @@ passport
 passport-local
 express-session
 socket.io
+monent
 ```
 
 ### Installing
@@ -34,7 +35,7 @@ npm install mongodb --save
 npm install bodyparser --save
 npm install passport passport-local express-session --save
 npm install socket.io --save
-
+npm install monent --save
 ```
 
 ## 업데이트 내역
@@ -45,6 +46,8 @@ npm install socket.io --save
     * 전역일 계산 페이지 완료
 * 0.1.1
     * 메인 페이지 실시간 채팅 추가
+    * 게시판 페이지 추가
+    * 글작성 기능 추가
 
 ## 정보
 

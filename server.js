@@ -10,6 +10,7 @@ const socket = require('socket.io');
 const app = express();
 const http = require('http').createServer(app);
 const { Server } = require("socket.io");
+const moment = require('moment');
 const io = new Server(http);
 
 const dburl = "mongodb+srv://h0ch1:a02070203@nodetest.kijps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
@@ -102,12 +103,33 @@ app.post('/result', (req, res) => {
 
 // 게시판
 app.get('/board', (req, res) => {
-  db.collection('board').findOne()
-  res.render('board.ejs', {});
+  db.collection('board').find().toArray((err, result) => {
+    res.render('board.ejs', {posts : result, moment});
+  })
 })
 
-app.get('/insert', (req, res) => {
-  res.render('insert.ejs', {});
+// 게시판 - 글 작성
+app.get('/write', (req, res) => {
+
+  res.render('write.ejs', {});
+})
+
+app.post('/add', (req, res) => {
+  var now = new Date();
+  var ny = now.getFullYear();
+  var nm = now.getMonth();
+  var nd = now.getDate();
+  var nowdate = new Date(ny,nm,nd);
+
+  db.collection('counter').findOne({ name : 'num' }, (err, result) => {
+    var total_post = result.totalPost;
+
+    db.collection('board').insertOne({ _id : total_post+1, title : req.body.title, date : nowdate, writer : req.body.writer, contents : req.body.content}, (err, result) => {
+      db.collection('counter').updateOne({ name : 'num'}, { $inc : {totalPost:1}}, (err, resuilt) => {
+        res.redirect('/board');
+      })
+    })
+  })
 })
 
 

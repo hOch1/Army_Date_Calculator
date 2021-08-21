@@ -30,21 +30,20 @@
         <table class="table table-hover">
             <tr>
                 <th>No</th>
-                <th>Subject</th>
-                <th>Writer</th>
-                <th>Date</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>날짜</th짜
             </tr>
-              <c:forEach var="l" items="${list}">
+              <% for(var i =0; i<posts.length; i++){%> 
                   <tr>
-                      <td>${l.bno}</td>
-                      <td>${l.subject}</td>
-                      <td>${l.writer}</td>
-                      <td>${l.reg_date}</td>
+                      <td><%= posts[i]._id %> </td>
+                      <td><%= posts[i].title %></td>
+                      <td><%= posts[i].writer %></td>
+                      <td><%= moment(posts[i].date).format('YYYY-MM-DD') %></td>
                   </tr>
-              </c:forEach>
-              
+                <% } %> 
         </table>
-        <button class="btn btn-primary" onclick="location.href='/insert'">글쓰기</button>
+        <button class="btn btn-primary" onclick="location.href='/write'">글쓰기</but기on>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>

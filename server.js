@@ -100,6 +100,16 @@ app.post('/result', (req, res) => {
   });
 })
 
+// 게시판
+app.get('/board', (req, res) => {
+  db.collection('board').findOne()
+  res.render('board.ejs', {});
+})
+
+app.get('/insert', (req, res) => {
+  res.render('insert.ejs', {});
+})
+
 
 // socket.io
 io.on('connection', (socket) => {

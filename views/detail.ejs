@@ -29,28 +29,32 @@
     <%- include('nav.html') %> 
 
       <div class="container mt-5">
-          <h1>제목 : <%= posts[id].title %>  </h1>
+          <h1>제목 : <%= posts.title %>  </h1>
           <div class="mt-3">
-              <h3>작성자 : <%= posts[id].writer %> </h3>
+              <h3>작성자 : <%= posts.writer %> </h3>
           </div>
           <div class="mt-5">
               <h5>내용</h5>
-              <p><%= posts[id].contents %> </p>
+              <p><%= posts.contents %> </p>
           </div>
           <button class="btn btn-primary" onclick="location.href='/edit/<%= id %> '">수정하기</button>
           <button class="btn btn-primary" data-id="<%= id %> "id="delete">삭제하기</button>
       </div>
 
       <script>
-        
         $('#delete').click((e) => {
           var id = parseInt(e.target.dataset.id)
           $.ajax({
             method : 'DELETE',
             url : '/delete',
-            data : { _id : id }
-          }).done(()=>{
-            location.replace = '/board';
+            data : { _id : id },
+            success: (data) => {
+              var data = JSON.parse(data);
+              if(data.status == '200'){
+                console.log('페이지이동');
+                location.replace('/board');
+              }
+            }
           })
         });
       </script>

@@ -10,7 +10,6 @@ const methodOverride = require('method-override');
 const io = new Server(http);
 
 const dburl = "mongodb+srv://h0ch1:a02070203@nodetest.kijps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-const port = process.env.PORT;
 
 app.use(express.urlencoded({extended: true}));
 app.set('view engine' , 'ejs');
@@ -27,7 +26,7 @@ MongoClient.connect(dburl, (err, client) => {
 
     db = client.db('armydate');
 
-    http.listen(port, () => {
+    http.listen(8080, () => {
         console.log('server start');
     })
 });
@@ -105,8 +104,7 @@ app.post('/add', (req, res) => {
 // 게시판 - 상세페이지
 app.get('/detail/:id', (req, res) => {
   db.collection('board').find().toArray((err, result) => {
-    console.log(result);
-    res.render('detail.ejs', {posts : result, id : req.params.id});
+    res.render('detail.ejs', {posts : result[req.params.id], id : result[req.params.id]._id});
   })
 })
 
@@ -131,6 +129,7 @@ app.delete('/delete', (req, res) => {
   db.collection('board').deleteOne(req.body, (err, result) => {
     console.log(req.body);
     console.log('삭제완료');
+    var data = {"status" : 200}
     res.redirect('/board');
   })
 })

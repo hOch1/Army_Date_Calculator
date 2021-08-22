@@ -10,6 +10,7 @@ const methodOverride = require('method-override');
 const io = new Server(http);
 
 const dburl = "mongodb+srv://h0ch1:a02070203@nodetest.kijps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const port = process.env.PORT;
 
 app.use(express.urlencoded({extended: true}));
 app.set('view engine' , 'ejs');
@@ -26,7 +27,7 @@ MongoClient.connect(dburl, (err, client) => {
 
     db = client.db('armydate');
 
-    http.listen(8080, () => {
+    http.listen(port, () => {
         console.log('server start');
     })
 });

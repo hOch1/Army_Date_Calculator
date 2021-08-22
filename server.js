@@ -11,6 +11,7 @@ const app = express();
 const http = require('http').createServer(app);
 const { Server } = require("socket.io");
 const moment = require('moment');
+const methodOverride = require('method-override');
 const io = new Server(http);
 
 const dburl = "mongodb+srv://h0ch1:a02070203@nodetest.kijps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
@@ -18,6 +19,7 @@ const dburl = "mongodb+srv://h0ch1:a02070203@nodetest.kijps.mongodb.net/myFirstD
 app.use(express.urlencoded({extended: true}));
 app.set('view engine' , 'ejs');
 app.use('/public', express.static('public'));
+app.use(methodOverride('_method'));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -146,10 +148,20 @@ app.get('/edit/:id', (req, res) => {
   })
 })
 
+app.put('/edit', (req, res) => {
+  db.collection('board').updateOne({ _id : parseInt(req.body.id) },
+  { $set : { title : req.body.title, writer : req.body.writer, contents : req.body.content}}, (err, result) => {
+    console.log(req.body.id);
+    res.redirect('/board');
+  })
+})
+
 // 게시판 - 삭제
-app.get('/delete/:id', (req, res) => {
-  db.collection('board').findOne({_id : parseInt(req.params.id)}, (err, result) => {
-    res.render('edit.ejs', {posts : result});
+app.delete('/delete', (req, res) => {
+  db.collection('board').deleteOne({_id : req.body._id}, (err, result) => {
+    console.log("id: "+req.body._id);
+    console.log('삭제완료');
+    res.redirect('/board');
   })
 })
 

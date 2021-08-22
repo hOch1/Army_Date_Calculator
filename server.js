@@ -137,6 +137,7 @@ app.post('/add', (req, res) => {
 // 게시판 - 상세페이지
 app.get('/detail/:id', (req, res) => {
   db.collection('board').find().toArray((err, result) => {
+    console.log(result);
     res.render('detail.ejs', {posts : result, id : req.params.id});
   })
 })
@@ -158,8 +159,9 @@ app.put('/edit', (req, res) => {
 
 // 게시판 - 삭제
 app.delete('/delete', (req, res) => {
-  db.collection('board').deleteOne({_id : req.body._id}, (err, result) => {
-    console.log("id: "+req.body._id);
+  req.body._id = parseInt(req.body._id);
+  db.collection('board').deleteOne(req.body, (err, result) => {
+    console.log(req.body);
     console.log('삭제완료');
     res.redirect('/board');
   })

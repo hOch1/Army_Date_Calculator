@@ -36,7 +36,7 @@
             </tr>
               <% for(var i =0; i<posts.length; i++){%> 
                   <tr>
-                      <td><%= posts[i]._id %> </td>
+                      <td><%= i+1 %> </td>
                       <td><a href="/detail/<%= posts[i]._id %>"><%= posts[i].title %></a></td>
                       <td><%= posts[i].writer %></td>
                       <td><%= moment(posts[i].date).format('YYYY-MM-DD') %></td>

@@ -1,11 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const session = require('express-session');
-const flash = require('connect-flash');
-const MongoStore = require('connect-mongo');
 const socket = require('socket.io');
 const app = express();
 const http = require('http').createServer(app);
@@ -39,34 +34,6 @@ MongoClient.connect(dburl, (err, client) => {
 // index 페이지
 app.get('/', (req, res) => {
     res.render('index.ejs');
-})
-
-// 로그인
-app.get('/signin', (req, res) => {
-    res.render('login.ejs');
-})
-
-app.post('/login', passport.authenticate('local', {failureRedirect : '/auth'}),
-    (req, res) => {
-      res.redirect('/');
-    }
-);
-
-// 로그아웃
-app.get('/logout', async (req, res) => {
-    try {
-      if(req.session) {
-        req.session.destroy();
-      }
-      res.redirect(req.headers.referer);
-    } catch (err) {
-      res.redirect(req.headers.referer);
-    }
-})
-
-// 회원가입
-app.get('/signup', (req, res) => {
-    res.render('signup.ejs');
 })
 
 // 전역일 계산

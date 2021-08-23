@@ -30,6 +30,7 @@
         <form action="/edit?_method=put" method="post">
           <div class="form-group">
             <input type="hidden" name="id" value="<%= posts._id %> ">
+            <input type="hidden" name="passwd" id="pw">
             <label for="subject">제목</label>
             <input type="text" class="form-control" id="subject" name="title" value="<%= posts.title %> ">
           </div>

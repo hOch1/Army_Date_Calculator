@@ -117,9 +117,15 @@ app.get('/detail/:id', (req, res) => {
 })
 
 // 게시판 - 수정
-app.get('/edit/:id', (req, res) => {
-  db.collection('board').findOne({_id : parseInt(req.params.id)}, (err, result) => {
-    res.render('edit.ejs', {posts : result});
+app.post('/edit/:id', (req, res) => {
+  db.collection('board').findOne({ _id : parseInt(req.params.id)}, (err, result) => {
+    if(req.body.passwd == result.pw){
+      db.collection('board').findOne({_id : parseInt(req.params.id)}, (err, result) => {
+        res.render('edit.ejs', {posts : result});
+      })
+    } else {
+      res.redirect('/board');
+    }
   })
 })
 
@@ -132,10 +138,14 @@ app.put('/edit', (req, res) => {
 
 // 게시판 - 삭제
 app.delete('/delete', (req, res) => {
-  db.collection('board').deleteOne({ _id : parseInt(req.body.id)}, (err, result) => {
-    console.log(req.body);
-    console.log('삭제완료');
-    res.redirect('/board');
+  db.collection('board').findOne({ _id : parseInt(req.body.id)}, (err, result) => {
+    if(req.body.passwd == result.pw){
+      db.collection('board').deleteOne({ _id : parseInt(req.body.id)}, (err, result) => {
+        res.redirect('/board');
+      })
+    }else{
+      res.redirect('/board');
+    }
   })
 })
 

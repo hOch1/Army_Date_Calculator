@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
+const mongodb = require('connect-mongo');
 const socket = require('socket.io');
 const app = express();
 const http = require('http').createServer(app);
@@ -93,7 +94,14 @@ app.post('/add', (req, res) => {
   db.collection('counter').findOne({ name : 'num' }, (err, result) => {
     var total_post = result.totalPost;
 
-    db.collection('board').insertOne({ _id : total_post+1, title : req.body.title, date : nowdate, writer : req.body.writer, contents : req.body.content}, (err, result) => {
+    db.collection('board').insertOne({
+       _id : total_post+1, 
+       title : req.body.title, 
+       date : nowdate, 
+       writer : req.body.writer,
+       pw : req.body.pw,
+       contents : req.body.content
+      }, (err, result) => {
       db.collection('counter').updateOne({ name : 'num'}, { $inc : {totalPost:1}}, (err, resuilt) => {
         res.redirect('/board');
       })
@@ -117,19 +125,16 @@ app.get('/edit/:id', (req, res) => {
 
 app.put('/edit', (req, res) => {
   db.collection('board').updateOne({ _id : parseInt(req.body.id) },
-  { $set : { title : req.body.title, writer : req.body.writer, contents : req.body.content}}, (err, result) => {
-    console.log(req.body.id);
+    { $set : { title : req.body.title, writer : req.body.writer, contents : req.body.content}}, (err, result) => {
     res.redirect('/board');
   })
 })
 
 // 게시판 - 삭제
 app.delete('/delete', (req, res) => {
-  req.body._id = parseInt(req.body._id);
-  db.collection('board').deleteOne(req.body, (err, result) => {
+  db.collection('board').deleteOne({ _id : parseInt(req.body.id)}, (err, result) => {
     console.log(req.body);
     console.log('삭제완료');
-    var data = {"status" : 200}
     res.redirect('/board');
   })
 })

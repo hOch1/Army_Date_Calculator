@@ -16,7 +16,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     
-    
+    <style>
+      .box{
+        display: inline-block;
+        width: 48%;
+      }
+    </style>
     <title>전역일 계산기</title>
   </head>
   <body>
@@ -27,14 +32,16 @@
     <div class="container">
       <form action="/result" method="POST">
         <div class="mb-3 mt-5">
-            <div class="mt-5">
-              <input name="start" type="text" class="selector form-select" placeholder="입대일을 선택하세요." />
-            </div>
-            <div class="mt-5">
-              <input name="end" type="text" class="selector form-select" placeholder="전역일을 선택하세요." />
-            </div>
+          <div class="mt-5 box">
+            <input name="start" type="text" class="selector form-select" placeholder="입대일을 선택하세요." />
+          </div>
+          <div class="mt-5 ml-4 box">
+            <input name="end" type="text" class="selector form-select" placeholder="전역일을 선택하세요." />
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary">계산하기</button>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-5 center-block">계산하기</button>
+        </div>
       </form>
     </div>
 

@@ -20,7 +20,7 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-var port = process.env.port;
+var port = process.env.PORT;
 
 // db연결 & 서버 실행
 var db

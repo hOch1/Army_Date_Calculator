@@ -20,6 +20,8 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+var port = process.env.port;
+
 // db연결 & 서버 실행
 var db
 MongoClient.connect(dburl, (err, client) => {
@@ -27,7 +29,7 @@ MongoClient.connect(dburl, (err, client) => {
 
     db = client.db('armydate');
 
-    http.listen(8080, () => {
+    http.listen(port, () => {
         console.log('server start');
     })
 });

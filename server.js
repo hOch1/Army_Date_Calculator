@@ -22,6 +22,11 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT;
 
+// Heroku sleep 방지
+setInterval(function () {
+  http.get("http://army-date-calculator.herokuapp.com");
+}, 600000);
+
 // db연결 & 서버 실행
 var db
 MongoClient.connect(dburl, (err, client) => {

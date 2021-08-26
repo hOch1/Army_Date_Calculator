@@ -10,6 +10,7 @@ const moment = require('moment');
 const methodOverride = require('method-override');
 const io = new Server(http);
 
+
 const dburl = "mongodb+srv://h0ch1:a02070203@nodetest.kijps.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 app.use(express.urlencoded({extended: true}));
@@ -23,8 +24,8 @@ app.use(bodyParser.json());
 var port = process.env.PORT;
 
 // Heroku sleep 방지
-setInterval(function () {
-  http.get("http://army-date-calculator.herokuapp.com");
+setInterval(() => {
+  http.get('https://army-date-calculator.herokuapp.com/');
 }, 600000);
 
 // db연결 & 서버 실행
